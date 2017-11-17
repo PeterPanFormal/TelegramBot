@@ -10,6 +10,10 @@
 <br/>1 Delete the group to join and leave the message
 <br/>2 Delete the group / beginning command message
 
+<br/>适用环境 
+<br/>Applicable environment 
+<br/>CentOS 7 x64 
+
 <br/>使用方法
 <br/>1 修改"YOUR TOKEN"为你的bot token
 <br/>2 在你的服务器运行 python PeterPanFormalBot.py
