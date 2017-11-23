@@ -2,9 +2,14 @@
 # -*- coding: utf-8 -*-
 # 本bot代码修改自 python-telegram-bot/examples/echobot2.py (https://github.com/python-telegram-bot/python-telegram-bot)
 # This bot code has been modified from python-telegram-bot / examples / echobot2.py (https://github.com/python-telegram-bot/python-telegram-bot)
+# test env : CentOS7 python2.7.5
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-import logging
+import logging,string,os,sys
+# python3
+# from configparser import ConfigParser
+# python2
+import ConfigParser
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -16,11 +21,43 @@ logger = logging.getLogger(__name__)
 # switch
 deleteGroupInOutMsg = 1
 deleteGroupCommondMsg = 1
+returnPrivateChatInfo = 1
+adminCommand = 1
+adminId = 1
+telegramToken = "1"
 
 
 def error(bot, update, error):
     """Log Errors caused by Updates."""
     logger.warning('Update "%s" caused error "%s"', update, error)
+
+
+def readConfig(config_file_path):
+    # python2
+    cf = ConfigParser.ConfigParser()
+    # python3
+    #cf = ConfigParser()
+    cf.read(config_file_path)
+
+    #s = cf.sections()
+    #o = cf.options("baseconf")
+    #v = cf.items("baseconf")
+
+    global deleteGroupInOutMsg,deleteGroupCommondMsg,returnPrivateChatInfo,adminCommand,adminId,telegramToken
+    deleteGroupInOutMsg = cf.getint("baseconf", "deleteGroupInOutMsg")
+    deleteGroupCommondMsg = cf.getint("baseconf", "deleteGroupCommondMsg")
+    returnPrivateChatInfo = cf.getint("baseconf", "returnPrivateChatInfo")
+    adminCommand = cf.getint("baseconf", "adminCommand")
+    adminId = cf.getint("baseconf", "adminId")
+    telegramToken = cf.get("baseconf", "telegramToken")
+    
+    logger.info("load ini success : deleteGroupInOutMsg, deleteGroupCommondMsg, returnPrivateChatInfo, adminCommand, adminId, telegramToken")
+    logger.info(deleteGroupInOutMsg)
+    logger.info(deleteGroupCommondMsg)
+    logger.info(returnPrivateChatInfo)
+    logger.info(adminCommand)
+    logger.info(adminId)
+    logger.info(telegramToken)
 
 
 def dealAll(bot, update):
@@ -36,13 +73,23 @@ def dealAll(bot, update):
     # Delete the / at the beginning of the command message
     elif deleteGroupCommondMsg == 1 and update.message.chat.type == "supergroup" and update.message.text.startswith('/'):
         bot.delete_message(chat_id=update.message.chat.id, message_id=update.message.message_id)
+    elif returnPrivateChatInfo == 1 and update.message.chat.type == "private" and not update.message.text.startswith('/'):
+        returnMsg = "from_user:" + str(update.message.from_user)
+        if not update.message.forward_from is None:
+            returnMsg += "\nforward_from_user:"
+            returnMsg += str(update.message.forward_from)
+        update.message.reply_text(returnMsg)
+    elif adminCommand == 1 and update.message.chat.type == "private" and update.message.from_user.id == adminId and  update.message.text.startswith('/'):
+        if update.message.text == '/help':
+            update.message.reply_text("参见:https://github.com/PeterPanFormal/TelegramBot")
+        else:
+            update.message.reply_text("nothing to do")
 
 
 def main():
+    readConfig(sys.argv[1])
     """Start the bot."""
-    # Create the EventHandler and pass it your bot's token.
-    # 这里将你的bot的token填写进来 替换"YOUR TOKEN"
-    updater = Updater(token="YOUR TOKEN")
+    updater = Updater(token=telegramToken)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
