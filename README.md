@@ -12,15 +12,15 @@
 
 <br/>适用环境 
 <br/>Applicable environment 
-<br/>CentOS 7 x64 
+<br/>CentOS 7 x64 python2.7.5
 
 <br/>使用方法
-<br/>1 修改"YOUR TOKEN"为你的bot token
-<br/>2 在你的服务器运行 python PeterPanFormalBot.py
+<br/>1 修改PeterPanFormalBot.ini中telegramToken的值为你的bot token, 与bot对话获取到你的用户id, 并修改adminId为你的id
+<br/>2 在你的服务器运行 python PeterPanFormalBot.py "YOUR INI PATH"(例如 python PeterPanFormalBot.py /root/PeterPanFormalBot.ini)
 <br/>3 在群组中添加你的bot并授予管理员权限, 注意, 群组必须升级为超级群
 <br/>Instructions
-<br/>1 Modify "YOUR TOKEN" as your bot token
-<br/>2 Run python PeterPanFormalBot.py on your server
+<br/>1 Modify the telegramToken value in PeterPanFormalBot.ini to be your bot token, talk to your bot to get your user id, and change adminId to your id
+<br/>2 Run python PeterPanFormalBot.py "YOUR INI PATH" on your server (eg python PeterPanFormalBot.py /root/PeterPanFormalBot.ini)
 <br/>3 Add your bot to the group and grant admin rights, be aware that the group must be upgraded to the super group
 
 <br/>实例
