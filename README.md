@@ -1,5 +1,12 @@
 # Telegram Bot
 # PeterPanFormalBot.py
+<br/>实例
+<br/>Instance
+<br/>https://t.me/PeterPanFormalBot
+
+<br/>(如果你只是想只用这个bot的功能的话, 只需点击上面的实例, 在群组中添加这个bot并授予管理员权限即可)
+<br/>(If you just want to use only this bot's features, just click on the instance above, add this bot to the group, and grant admin rights)
+
 <br/>本bot代码修改自 <a href="https://github.com/python-telegram-bot/python-telegram-bot" targer="_blank">python-telegram-bot/examples/echobot2.py</a>
 <br/>This bot code has been modified from <a href="https://github.com/python-telegram-bot/python-telegram-bot" targer="_blank">python-telegram-bot/examples/echobot2.py</a>
 
@@ -23,6 +30,3 @@
 <br/>2 Run python PeterPanFormalBot.py "YOUR INI PATH" on your server (eg python PeterPanFormalBot.py /root/PeterPanFormalBot.ini)
 <br/>3 Add your bot to the group and grant admin rights, be aware that the group must be upgraded to the super group
 
-<br/>实例
-<br/>Instance
-<br/>https://t.me/PeterPanFormalBot
